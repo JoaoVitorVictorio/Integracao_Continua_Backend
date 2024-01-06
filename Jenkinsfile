@@ -20,7 +20,7 @@ pipeline {
             steps {
                 dir('api-test') {
                     git credentialsId: 'GitHub_Login', url: 'https://github.com/JoaoVitorVictorio/Integracao_Continua_Api.git'
-                    bat 'mvn test'
+                    bat 'mvn clean test'
                 }
             }
         }
