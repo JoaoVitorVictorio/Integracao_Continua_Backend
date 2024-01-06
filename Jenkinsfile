@@ -18,8 +18,10 @@ pipeline {
         } 
         stage('API Test') {
             steps {
-                git credentialsId: 'GitHub_Login', url: 'https://github.com/JoaoVitorVictorio/Integracao_Continua_Api.git'
-                bat 'mvn test'
+                dir('api-test') {
+                    git credentialsId: 'GitHub_Login', url: 'https://github.com/JoaoVitorVictorio/Integracao_Continua_Api.git'
+                    bat 'mvn test'
+                }
             }
         }
     }
