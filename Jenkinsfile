@@ -27,10 +27,18 @@ pipeline {
         stage('Deploy Frontend') {
             steps {
                 dir('frontend') {
-                git credentialsId: 'GitHub_Login', url: 'https://github.com/JoaoVitorVictorio/Integracao_Continua_FrontEnd.git'
-                bat 'mvn clean package -DskipTests=true'
-                deploy adapters: [tomcat8(credentialsId: 'TomcatLogin', path: '', url: 'http://localhost:8001/')], contextPath: 'tasks', war: 'target/tasks.war'
+                    git credentialsId: 'GitHub_Login', url: 'https://github.com/JoaoVitorVictorio/Integracao_Continua_FrontEnd.git'
+                    bat 'mvn clean package -DskipTests=true'
+                    deploy adapters: [tomcat8(credentialsId: 'TomcatLogin', path: '', url: 'http://localhost:8001/')], contextPath: 'tasks', war: 'target/tasks.war'
+                }
             }
+        }
+          stage('Funcional Test') {
+            steps {
+                dir('funcional-test') {
+                    git branch: 'main', credentialsId: 'GitHub_Login', url: 'https://github.com/JoaoVitorVictorio/Integracao_Continua_Testes_Funcionais.git'
+                    bat 'mvn test'
+                }
             }
         } 
     }
