@@ -33,7 +33,7 @@ pipeline {
                 }
             }
         }
-          stage('Funcional Test') {
+        stage('Funcional Test') {
             steps {
                 dir('funcional-test') {
                     git branch: 'main', credentialsId: 'GitHub_Login', url: 'https://github.com/JoaoVitorVictorio/Integracao_Continua_Testes_Funcionais.git'
